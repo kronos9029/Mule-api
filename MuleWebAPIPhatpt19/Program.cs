@@ -23,7 +23,7 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 builder.Services.AddAutoMapper(typeof(ApplicationMappingProfile));
-var ok = builder.Configuration.GetConnectionString("DEV_PHAT");
+var ok = builder.Configuration.GetConnectionString("PROD_PHAT");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseMySql(ok,
     new MySqlServerVersion(new Version(5, 7, 44))));
