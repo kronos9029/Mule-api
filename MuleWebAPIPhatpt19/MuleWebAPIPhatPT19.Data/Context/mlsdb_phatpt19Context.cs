@@ -29,7 +29,7 @@ namespace MuleWebAPIPhatPT19.Data.Context
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseMySql("server=localhost;port=3306;database=mlsdb_phatpt19;user=root;password=P@ssw0rd;persist security info=False;convert zero datetime=True;allow zero datetime=True;connect timeout=300;charset=utf8", ServerVersion.Parse("5.7.44-mysql"));
+                optionsBuilder.UseMySql("server=junction.proxy.rlwy.net; port=42735; database=mlsdb_phatpt19; user=root; password=hQNXpIYrEZDCLaOjQlvHdjhcRUZmhGwH; Persist Security Info=False; Convert Zero Datetime=True;Allow Zero Datetime=True; Connect Timeout=300;Charset=utf8", ServerVersion.Parse("5.7.44-mysql"));
             }
         }
 
