@@ -16,13 +16,9 @@ RUN dotnet build "MuleWebAPIPhatpt19.csproj" -c Release -o /app/build
 # Publish stage
 FROM build AS publish
 RUN dotnet publish "MuleWebAPIPhatpt19.csproj" -c Release -o /app/publish /p:UseAppHost=false
-# List the published files for debugging
-RUN ls /app/publish
 
-# Final stage
+# Final stage: running the app
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-# List files again to confirm successful copy
-RUN ls /app
 ENTRYPOINT ["dotnet", "MuleWebAPIPhatpt19.dll"]
