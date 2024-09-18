@@ -1,14 +1,8 @@
 ﻿using AutoMapper;
-using Microsoft.EntityFrameworkCore;
 using MuleWebAPIPhatPT19.Business.Services.Interfaces;
 using MuleWebAPIPhatPT19.Data.Helpers;
 using MuleWebAPIPhatPT19.Data.Models.DTOs;
 using MuleWebAPIPhatPT19.Data.Models.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MuleWebAPIPhatPT19.Business.Services
 {
@@ -26,7 +20,7 @@ namespace MuleWebAPIPhatPT19.Business.Services
             var responseDTO = new ResponseDTO();
 
             // Map DTO to entity
-            var orderDetailEntity = _mapper.Map<Purchaseorderdetail>(purchaseOrderDetailDTO);
+            var orderDetailEntity = _mapper.Map<purchaseorderdetail>(purchaseOrderDetailDTO);
 
             // Add the order detail entity to the context
             _context.PurchaseOrderDetails.Add(orderDetailEntity);

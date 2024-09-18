@@ -17,19 +17,18 @@ namespace MuleWebAPIPhatPT19.Data.Context
         {
         }
 
-        public virtual DbSet<Account> Accounts { get; set; } = null!;
-        public virtual DbSet<Product> Products { get; set; } = null!;
-        public virtual DbSet<Purchaseorder> Purchaseorders { get; set; } = null!;
-        public virtual DbSet<Purchaseorderdetail> Purchaseorderdetails { get; set; } = null!;
-        public virtual DbSet<Salesorder> Salesorders { get; set; } = null!;
-        public virtual DbSet<Salesorderdetail> Salesorderdetails { get; set; } = null!;
+        public virtual DbSet<product> Products { get; set; } = null!;
+        public virtual DbSet<purchaseorder> Purchaseorders { get; set; } = null!;
+        public virtual DbSet<purchaseorderdetail> Purchaseorderdetails { get; set; } = null!;
+        public virtual DbSet<salesorder> Salesorders { get; set; } = null!;
+        public virtual DbSet<salesorderdetail> Salesorderdetails { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseMySql("server=junction.proxy.rlwy.net; port=42735; database=mlsdb_phatpt19; user=root; password=hQNXpIYrEZDCLaOjQlvHdjhcRUZmhGwH; Persist Security Info=False; Convert Zero Datetime=True;Allow Zero Datetime=True; Connect Timeout=300;Charset=utf8", ServerVersion.Parse("5.7.44-mysql"));
+                optionsBuilder.UseMySql("server=junction.proxy.rlwy.net; port=45448; database=railway; user=root; password=TbgchNdWXBhdAxWVsqOwLsMVBczeoCjh; Persist Security Info=False; Convert Zero Datetime=True;Allow Zero Datetime=True; Connect Timeout=300;Charset=utf8", ServerVersion.Parse("9.0.1-mysql"));
             }
         }
 
@@ -38,30 +37,9 @@ namespace MuleWebAPIPhatPT19.Data.Context
             modelBuilder.UseCollation("latin1_swedish_ci")
                 .HasCharSet("latin1");
 
-            modelBuilder.Entity<Account>(entity =>
+            modelBuilder.Entity<product>(entity =>
             {
-                entity.HasKey(e => new { e.FldAccount, e.FldPassword })
-                    .HasName("PRIMARY")
-                    .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0 });
-
-                entity.ToTable("accounts");
-
-                entity.Property(e => e.FldAccount)
-                    .HasMaxLength(6)
-                    .HasColumnName("fldAccount");
-
-                entity.Property(e => e.FldPassword)
-                    .HasMaxLength(150)
-                    .HasColumnName("fldPassword");
-
-                entity.Property(e => e.FldRole)
-                    .HasMaxLength(10)
-                    .HasColumnName("fldRole");
-            });
-
-            modelBuilder.Entity<Product>(entity =>
-            {
-                entity.HasKey(e => new { e.ProductCode, e.UnitPrice })
+                entity.HasKey(e => new { e.ProductCode })
                     .HasName("PRIMARY")
                     .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0 });
 
@@ -82,7 +60,7 @@ namespace MuleWebAPIPhatPT19.Data.Context
                 entity.Property(e => e.Unit).HasMaxLength(20);
             });
 
-            modelBuilder.Entity<Purchaseorder>(entity =>
+            modelBuilder.Entity<purchaseorder>(entity =>
             {
                 entity.HasKey(e => new { e.OrderNo, e.OrderDate })
                     .HasName("PRIMARY")
@@ -105,7 +83,7 @@ namespace MuleWebAPIPhatPT19.Data.Context
                 entity.Property(e => e.Title).HasMaxLength(50);
             });
 
-            modelBuilder.Entity<Purchaseorderdetail>(entity =>
+            modelBuilder.Entity<purchaseorderdetail>(entity =>
             {
                 entity.HasKey(e => new { e.OrderNo, e.ProductCode, e.PurchasePrice })
                     .HasName("PRIMARY")
@@ -122,7 +100,7 @@ namespace MuleWebAPIPhatPT19.Data.Context
                 entity.Property(e => e.Tax).HasDefaultValueSql("'0'");
             });
 
-            modelBuilder.Entity<Salesorder>(entity =>
+            modelBuilder.Entity<salesorder>(entity =>
             {
                 entity.HasKey(e => new { e.OrderNo, e.OrderDate })
                     .HasName("PRIMARY")
@@ -145,7 +123,7 @@ namespace MuleWebAPIPhatPT19.Data.Context
                 entity.Property(e => e.Title).HasMaxLength(50);
             });
 
-            modelBuilder.Entity<Salesorderdetail>(entity =>
+            modelBuilder.Entity<salesorderdetail>(entity =>
             {
                 entity.HasKey(e => new { e.OrderNo, e.ProductCode, e.SalesPrice })
                     .HasName("PRIMARY")

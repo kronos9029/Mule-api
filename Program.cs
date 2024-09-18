@@ -18,15 +18,23 @@ builder.Services.AddSwaggerGen(c =>
     c.SwaggerDoc("v1", new OpenApiInfo
     {
         Version = "v1",
-        Title = "ok API",
+        Title = "Mulesoft test API",
         Description = "API Documentation"
     });
 });
 builder.Services.AddAutoMapper(typeof(ApplicationMappingProfile));
 var ok = builder.Configuration.GetConnectionString("PROD_PHAT");
+/*builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseMySql(ok, new MySqlServerVersion(new Version(5, 7, 44))));*/
+
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseMySql(ok,
-    new MySqlServerVersion(new Version(5, 7, 44))));
+    options.UseMySql(ok, new MySqlServerVersion(new Version(9, 0, 1)),
+        mySqlOptions => mySqlOptions.EnableRetryOnFailure(
+            maxRetryCount: 5, // Number of retry attempts before failing
+            maxRetryDelay: TimeSpan.FromSeconds(30), // Maximum delay between retries
+            errorNumbersToAdd: null // Optional: add specific error numbers to retry on
+        )
+    ));
 
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IPurchaseOrderService, PurchaseOrderService>();

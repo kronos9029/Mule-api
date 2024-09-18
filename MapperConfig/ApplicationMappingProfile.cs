@@ -14,11 +14,11 @@ namespace MuleWebAPIPhatPT19.Business.MapperConfig
         public ApplicationMappingProfile()
         {
 
-            CreateMap<ProductDTO, Product>().ReverseMap();
-            CreateMap<PurchaseOrderDTO, Purchaseorder>().ReverseMap();
-            CreateMap<PurchaseOrderDetailDTO, Purchaseorderdetail>().ReverseMap();
-            CreateMap<SalesOrderDTO, Salesorder>().ReverseMap();
-            CreateMap<SalesOrderDetailDTO, Salesorderdetail>().ReverseMap();
+            CreateMap<ProductDTO, product>().ReverseMap();
+            CreateMap<PurchaseOrderDTO, purchaseorder>().ReverseMap();
+            CreateMap<PurchaseOrderDetailDTO, purchaseorderdetail>().ReverseMap();
+            CreateMap<SalesOrderDTO, salesorder>().ReverseMap();
+            CreateMap<SalesOrderDetailDTO, salesorderdetail>().ReverseMap();
         }
     }
 }

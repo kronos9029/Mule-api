@@ -4,11 +4,6 @@ using MuleWebAPIPhatPT19.Business.Services.Interfaces;
 using MuleWebAPIPhatPT19.Data.Helpers;
 using MuleWebAPIPhatPT19.Data.Models.DTOs;
 using MuleWebAPIPhatPT19.Data.Models.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MuleWebAPIPhatPT19.Business.Services
 {
@@ -35,7 +30,7 @@ namespace MuleWebAPIPhatPT19.Business.Services
             try
             {
                 // Map the PurchaseOrderDTO to the PurchaseOrder entity
-                var orderEntity = _mapper.Map<Purchaseorder>(purchaseOrderDTO);
+                var orderEntity = _mapper.Map<purchaseorder>(purchaseOrderDTO);
 
                 // Add the PurchaseOrder to the context
                 await _context.PurchaseOrders.AddAsync(orderEntity);
@@ -65,20 +60,22 @@ namespace MuleWebAPIPhatPT19.Business.Services
                             var isQuantityReduced = await ReduceProductQuantity(purchaseOrderDTO.Detail.ProductCode, purchaseOrderDTO.Detail.Quantity);
                             if (isQuantityReduced.Success)
                             {
-                                Console.WriteLine("Product quantity reduced successfully.");
+                                responseDTO.Message = "Success to create purchase order.";
                             }
                             else
                             {
-                                Console.WriteLine("Failed to reduce product quantity.");
+                                responseDTO.Success = false;
+                                responseDTO.Message = "Failed to reduce product quantity.";
                             }
                             bool isUpdated = await _productService.UpdateProductUnitPrice(purchaseOrderDTO.Detail.ProductCode);
                             if (isUpdated)
                             {
-                                Console.WriteLine("Product UnitPrice updated successfully.");
+                                responseDTO.Message = "Product UnitPrice updated successfully.";
                             }
                             else
                             {
-                                Console.WriteLine("Failed to update Product UnitPrice.");
+                                responseDTO.Success = false;
+                                responseDTO.Message = "Failed to update Product UnitPrice.";
                             }
                         }
                     }

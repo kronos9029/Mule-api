@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MuleWebAPIPhatPT19.Data.Models.Entities
 {
-    public partial class Purchaseorder
+    [Table("purchaseorder")]
+    public partial class purchaseorder
     {
         public string OrderNo { get; set; } = null!;
         public DateTime OrderDate { get; set; }
