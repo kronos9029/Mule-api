@@ -49,11 +49,24 @@ namespace MuleWebAPIPhatPT19.Business.Services
             return responseDTO;
         }
 
-        public async Task AddProductAsync(ProductDTO productDTO)
+        public async Task<ResponseDTO> AddProductAsync(ProductDTO productDTO)
         {
+            // Map the ProductDTO to the Product entity
             var productEntity = _mapper.Map<product>(productDTO);
+
+            // Add the product to the context
             _context.Products.Add(productEntity);
             await _context.SaveChangesAsync();
+
+            // Map the saved product entity back to a DTO (if needed) or create a simple response
+            var responseDTO = new ResponseDTO
+            {
+                Success = true,
+                Message = "Product added successfully",
+                Data = productDTO // You can map back the entity if you need specific fields
+            };
+
+            return responseDTO;
         }
 
         public async Task<bool> UpdateProductById(ProductDTO productDTO)

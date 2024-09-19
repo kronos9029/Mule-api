@@ -25,8 +25,8 @@ namespace MuleWebAPIPhatpt19.API.Controllers
         [HttpPost]
         public async Task<IActionResult> AddProduct([FromBody] ProductDTO productDTO)
         {
-            await _productService.AddProductAsync(productDTO);
-            return Ok();
+            var result = await _productService.AddProductAsync(productDTO);
+            return Ok(result);
         }
 
         [HttpPut("update")]

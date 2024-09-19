@@ -10,7 +10,7 @@ namespace MuleWebAPIPhatPT19.Business.Services.Interfaces
     public interface IProductService
     {
         Task<ResponseDTO> GetAllProducts();
-        Task AddProductAsync(ProductDTO productDTO);
+        Task<ResponseDTO> AddProductAsync(ProductDTO productDTO);
         Task<bool> UpdateProductById(ProductDTO productDTO);
         Task<ProductDTO> FindProductById(string productId, double unitPrice);
         Task<bool> UpdateProductUnitPrice(string productId);
