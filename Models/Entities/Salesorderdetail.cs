@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MuleWebAPIPhatPT19.Data.Models.Entities
 {
-    [Table("salesorderdetail")]
+    [Table("salesorderdetails")]
     public partial class salesorderdetail
     {
         public string OrderNo { get; set; } = null!;
